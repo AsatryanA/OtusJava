@@ -1,0 +1,22 @@
+
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+
+dependencies {
+    implementation "com.google.guava:guava"
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "HelloOtus"
+    }
+
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+    from {
+        configurations.runtimeClasspath.collect {zipTree(it)}
+    }
+}

@@ -1,0 +1,37 @@
+import org.example.Versions
+
+plugins {
+    id 'idea'
+    id "io.spring.dependency-management" version "1.0.13.RELEASE"
+}
+
+idea {
+    project {
+        languageLevel = 18
+    }
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+allprojects {
+
+
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: "io.spring.dependency-management"
+    dependencyManagement {
+        dependencies {
+            dependency("com.google.guava:guava:${Versions.guava}")
+        }
+    }
+    configurations.all {
+        resolutionStrategy {
+            failOnVersionConflict()
+        }
+    }
+
+}
